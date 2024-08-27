@@ -1,0 +1,16 @@
+{
+	"name": "CustomersCleaned",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "staged",
+			"table": "customers"
+		}
+	}
+}

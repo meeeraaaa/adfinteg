@@ -1,0 +1,143 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "customers_output",
+						"type": "DatasetReference"
+					},
+					"name": "cleaningCustomers"
+				},
+				{
+					"dataset": {
+						"referenceName": "OrdersOUTPUT",
+						"type": "DatasetReference"
+					},
+					"name": "cleaningOrders"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "CustomersCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "outputOfCleaning"
+				},
+				{
+					"dataset": {
+						"referenceName": "OrdersCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "outputofCleaningOrders"
+				}
+			],
+			"transformations": [
+				{
+					"name": "removingNULLSofCustomer",
+					"description": "Add expression for the fi!(isNull($CustomerID)||isNull($FirstName)||isNull($LastName)||isNull($Email)||isNull($PhoneNumber)||isNull($Address))lter"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "removingTheDuplicates"
+				},
+				{
+					"name": "removingNULLSofOrders"
+				},
+				{
+					"name": "ranking"
+				},
+				{
+					"name": "removingDuplicates"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     CustomerID as string (Prop_0),",
+				"     FirstName as string (Prop_1),",
+				"     LastName as string (Prop_2),",
+				"     Email as string (Prop_3),",
+				"     PhoneNumber as string (Prop_4),",
+				"     Address as string (Prop_6)",
+				"}",
+				"source(output(",
+				"          Prop_0 as string,",
+				"          Prop_1 as string,",
+				"          Prop_2 as string,",
+				"          Prop_3 as string,",
+				"          Prop_4 as string,",
+				"          Prop_5 as string,",
+				"          Prop_6 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> cleaningCustomers",
+				"source(output(",
+				"          OrderID as short,",
+				"          ProductID as string,",
+				"          ProductName as string,",
+				"          Quantity as short,",
+				"          OrderTimestamp as timestamp,",
+				"          Price as double,",
+				"          CustomerID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> cleaningOrders",
+				"cleaningCustomers filter(!(isNull(Prop_0)||isNull(Prop_1)||isNull(Prop_2)||isNull(Prop_3)||isNull(Prop_4)||isNull(Prop_5))) ~> removingNULLSofCustomer",
+				"removingNULLSofCustomer window(over(Prop_0),",
+				"     asc(Prop_0, true),",
+				"     RANK = rowNumber()) ~> window1",
+				"window1 filter(equals(RANK,1)) ~> removingTheDuplicates",
+				"cleaningOrders filter(!(isNull(OrderTimestamp))) ~> removingNULLSofOrders",
+				"removingNULLSofOrders window(over(OrderID),",
+				"     asc(OrderID, true),",
+				"     RANK = rowNumber()) ~> ranking",
+				"ranking filter(equals(RANK,1)) ~> removingDuplicates",
+				"removingTheDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Prop_0,",
+				"          Prop_1,",
+				"          Prop_2,",
+				"          Prop_3,",
+				"          Prop_4,",
+				"          Prop_5,",
+				"          Prop_6",
+				"     )) ~> outputOfCleaning",
+				"removingDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          OrderID,",
+				"          ProductID,",
+				"          ProductName,",
+				"          Quantity,",
+				"          OrderTimestamp,",
+				"          Price,",
+				"          CustomerID",
+				"     )) ~> outputofCleaningOrders"
+			]
+		}
+	}
+}
