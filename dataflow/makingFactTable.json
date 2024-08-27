@@ -1,0 +1,45 @@
+{
+	"name": "makingFactTable",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CustomersCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "cleanedCustomers"
+				},
+				{
+					"dataset": {
+						"referenceName": "OrdersCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "cleanedOrders"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> cleanedCustomers",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> cleanedOrders",
+				"cleanedCustomers, cleanedOrders join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
+			]
+		}
+	}
+}
