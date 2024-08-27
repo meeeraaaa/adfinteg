@@ -1,0 +1,19 @@
+{
+	"name": "test-IR1",
+	"properties": {
+		"type": "Managed",
+		"description": "testing IR",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "East US",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 10,
+					"cleanup": false,
+					"customProperties": []
+				}
+			}
+		}
+	}
+}

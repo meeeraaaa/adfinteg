@@ -1,0 +1,6 @@
+{
+	"name": "selfhostedtest-IR1",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

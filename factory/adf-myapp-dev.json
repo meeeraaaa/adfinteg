@@ -1,0 +1,9 @@
+{
+	"name": "adf-myapp-dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c6f4f8ff-dccc-4361-8ce1-6dd56303ff00",
+		"tenantId": "2800c0a0-70e9-49be-8733-faeaa6aced99"
+	}
+}

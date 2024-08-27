@@ -1,0 +1,12 @@
+{
+	"name": "LS_ETL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=stmyapp001;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDYwRDc2MjZFLURBRTgtNDcwNy04MThDLTFCOEJERTU0QzQ5Nl8zOWFmYWFkYy1lZGI1LTQ1NDMtYWE4ZS05YThkZjVhYTdhYWUiDQp9"
+		}
+	}
+}

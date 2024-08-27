@@ -1,0 +1,177 @@
+{
+	"name": "opportunityData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Opportunity data 1.csv",
+				"container": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "opportunity_id",
+				"type": "String"
+			},
+			{
+				"name": "opportunity_name",
+				"type": "String"
+			},
+			{
+				"name": "opportunity_start_date",
+				"type": "String"
+			},
+			{
+				"name": "opportunity_end_date",
+				"type": "String"
+			},
+			{
+				"name": "opportunity_owner_id",
+				"type": "String"
+			},
+			{
+				"name": "opportunity_other_id",
+				"type": "String"
+			},
+			{
+				"name": "account_manager",
+				"type": "String"
+			},
+			{
+				"name": "uk_account_manager",
+				"type": "String"
+			},
+			{
+				"name": "chennai_account_manager",
+				"type": "String"
+			},
+			{
+				"name": "book_owner",
+				"type": "String"
+			},
+			{
+				"name": "company_id",
+				"type": "String"
+			},
+			{
+				"name": "contact_id",
+				"type": "String"
+			},
+			{
+				"name": "offering",
+				"type": "String"
+			},
+			{
+				"name": "opportunity_stage",
+				"type": "String"
+			},
+			{
+				"name": "tech_stack",
+				"type": "String"
+			},
+			{
+				"name": "deal_team",
+				"type": "String"
+			},
+			{
+				"name": "technical_team_dependency",
+				"type": "String"
+			},
+			{
+				"name": "resourcing_comments",
+				"type": "String"
+			},
+			{
+				"name": "resourcing_status",
+				"type": "String"
+			},
+			{
+				"name": "amount",
+				"type": "String"
+			},
+			{
+				"name": "currency",
+				"type": "String"
+			},
+			{
+				"name": "forecast_amount",
+				"type": "String"
+			},
+			{
+				"name": "amount_in_company_currency",
+				"type": "String"
+			},
+			{
+				"name": "weighted_amount",
+				"type": "String"
+			},
+			{
+				"name": "parent_account_key",
+				"type": "String"
+			},
+			{
+				"name": "client_coverage_office",
+				"type": "String"
+			},
+			{
+				"name": "secondary_project_type",
+				"type": "String"
+			},
+			{
+				"name": "forecast_category",
+				"type": "String"
+			},
+			{
+				"name": "number_of_associated_contacts",
+				"type": "String"
+			},
+			{
+				"name": "number_of_times_contacted",
+				"type": "String"
+			},
+			{
+				"name": "number_of_sales_activities",
+				"type": "String"
+			},
+			{
+				"name": "last_activity_date",
+				"type": "String"
+			},
+			{
+				"name": "next_activity_date",
+				"type": "String"
+			},
+			{
+				"name": "chance_of_closing",
+				"type": "String"
+			},
+			{
+				"name": "close_date",
+				"type": "String"
+			},
+			{
+				"name": "deal_type",
+				"type": "String"
+			},
+			{
+				"name": "created_at",
+				"type": "String"
+			},
+			{
+				"name": "updated_at",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
