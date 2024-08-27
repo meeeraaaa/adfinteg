@@ -1,9 +1,0 @@
-{
-	"name": "demopipeline1",
-	"properties": {
-		"description": "this is my first pipeline which copies data from source SA to sink SA",
-		"annotations": [],
-		"lastPublishTime": "2024-08-24T06:48:44Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
-}
