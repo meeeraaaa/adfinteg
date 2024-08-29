@@ -1,0 +1,7 @@
+{
+	"name": "IR-MySQL",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "ir for mysql in newwave training jman"
+	}
+}
