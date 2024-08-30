@@ -1,0 +1,40 @@
+{
+	"name": "quiz_FS",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "quizQuestionSQL",
+						"type": "DatasetReference"
+					},
+					"name": "quizQuestions"
+				},
+				{
+					"name": "quiz"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          quizQuestionID as string,",
+				"          questionName as string,",
+				"          answer1 as string,",
+				"          answer2 as string,",
+				"          answer3 as string,",
+				"          quizID as string,",
+				"          correctAnswer as string,",
+				"          questionType as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> quizQuestions",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> quiz"
+			]
+		}
+	}
+}
