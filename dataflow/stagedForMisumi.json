@@ -33,7 +33,11 @@
 						"referenceName": "categoriesCleaned",
 						"type": "DatasetReference"
 					},
-					"name": "gotCategories"
+					"name": "gotCategories",
+					"rejectedDataLinkedService": {
+						"referenceName": "LS_ETL",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [

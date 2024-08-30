@@ -20,11 +20,7 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "joinOfProductsAndCategories"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -33,12 +29,7 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> categories",
-				"products, categories join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> joinOfProductsAndCategories"
+				"     format: 'table') ~> categories"
 			]
 		}
 	}
