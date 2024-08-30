@@ -19,7 +19,36 @@
 					"name": "categories"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "shippingForProducts",
+						"type": "DatasetReference"
+					},
+					"name": "shipingProducts"
+				},
+				{
+					"dataset": {
+						"referenceName": "shippingBrands",
+						"type": "DatasetReference"
+					},
+					"name": "shippingBrands"
+				},
+				{
+					"dataset": {
+						"referenceName": "topCategories",
+						"type": "DatasetReference"
+					},
+					"name": "TopCategories"
+				},
+				{
+					"dataset": {
+						"referenceName": "topBrand",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "joinProductsAndCategories"
@@ -109,7 +138,47 @@
 				"     errors: true) ~> castingDayss",
 				"castingDayss aggregate(groupBy(category_name),",
 				"     min_standard_days_to_ship = avg(min_standard_days_to_ship),",
-				"          max_standard_days_to_ship = avg(max_standard_days_to_ship)) ~> avgOfShippingDaysForCategories"
+				"          max_standard_days_to_ship = avg(max_standard_days_to_ship)) ~> avgOfShippingDaysForCategories",
+				"avgOfShippingDaysForCategories sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> shipingProducts",
+				"avgOfShippingDaysForBrand sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> shippingBrands",
+				"sort2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> TopCategories",
+				"sort1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}

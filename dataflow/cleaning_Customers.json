@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "cleaning_Customers",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -101,8 +101,7 @@
 				"    ||isNull(Address)\r",
 				"    ||isNull(ZipCode)\r",
 				"    ||isNull(Country)\r",
-				"    )\r",
-				") ~> removingNULLSofCustomer",
+				"    )) ~> removingNULLSofCustomer",
 				"removingNULLSofCustomer window(over(CustomerID),",
 				"     asc(CustomerID, true),",
 				"     RANK = rowNumber()) ~> window1",
