@@ -1,0 +1,49 @@
+{
+	"name": "quizQuestionSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "quizQuestionID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "questionName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "answer1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "answer2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "answer3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "quizID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "correctAnswer",
+				"type": "nvarchar"
+			},
+			{
+				"name": "questionType",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "quizQuestion"
+		}
+	}
+}

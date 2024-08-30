@@ -1,0 +1,41 @@
+{
+	"name": "constactUsSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "c_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "c_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "c_mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "c_email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "c_address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "c_message",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "contactUs"
+		}
+	}
+}

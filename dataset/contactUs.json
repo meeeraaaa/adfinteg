@@ -1,0 +1,48 @@
+{
+	"name": "contactUs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "contactus.csv",
+				"container": "quiz"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "c_id",
+				"type": "String"
+			},
+			{
+				"name": "c_name",
+				"type": "String"
+			},
+			{
+				"name": "c_mobile",
+				"type": "String"
+			},
+			{
+				"name": "c_email",
+				"type": "String"
+			},
+			{
+				"name": "c_address",
+				"type": "String"
+			},
+			{
+				"name": "c_message",
+				"type": "String"
+			}
+		]
+	}
+}

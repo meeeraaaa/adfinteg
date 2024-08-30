@@ -1,0 +1,40 @@
+{
+	"name": "instructor",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "instructor.csv",
+				"container": "quiz"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "instructorID",
+				"type": "String"
+			},
+			{
+				"name": "iname",
+				"type": "String"
+			},
+			{
+				"name": "username",
+				"type": "String"
+			},
+			{
+				"name": "ipassword",
+				"type": "String"
+			}
+		]
+	}
+}
