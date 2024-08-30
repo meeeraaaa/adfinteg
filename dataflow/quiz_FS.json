@@ -12,6 +12,10 @@
 					"name": "quizQuestions"
 				},
 				{
+					"dataset": {
+						"referenceName": "quizSQL",
+						"type": "DatasetReference"
+					},
 					"name": "quiz"
 				}
 			],
@@ -32,8 +36,21 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> quizQuestions",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> quiz"
+				"source(output(",
+				"          quizID as string,",
+				"          InstructorID as string,",
+				"          quizName as string,",
+				"          dateOpen as string,",
+				"          dateClose as string,",
+				"          quizDescription as string,",
+				"          quizCode as string,",
+				"          classAverage as string,",
+				"          numStudents as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> quiz"
 			]
 		}
 	}

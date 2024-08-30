@@ -124,15 +124,7 @@
 			{
 				"name": "Copy data for quizQuestions",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
-					{
-						"activity": "Copy data for student",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
 					{
 						"activity": "Copy data for instructor",
 						"dependencyConditions": [
@@ -163,7 +155,9 @@
 					"sink": {
 						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -177,7 +171,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "quizQuestion",
+						"referenceName": "quizzQuestion",
 						"type": "DatasetReference"
 					}
 				],
@@ -224,7 +218,9 @@
 					"sink": {
 						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -250,9 +246,18 @@
 				]
 			},
 			{
-				"name": "Copy data for student",
+				"name": "Copy datafor quiz",
 				"type": "Copy",
-				"dependsOn": [],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copy data for quizQuestions",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -263,14 +268,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "ExcelSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -292,13 +294,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "students",
+						"referenceName": "quiz",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "studentSQL",
+						"referenceName": "quizSQL",
 						"type": "DatasetReference"
 					}
 				]

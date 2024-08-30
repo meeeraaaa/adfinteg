@@ -1,0 +1,56 @@
+{
+	"name": "quizzQuestion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "quizquestion.csv",
+				"container": "quiz"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "quizQuestionID",
+				"type": "String"
+			},
+			{
+				"name": "questionName",
+				"type": "String"
+			},
+			{
+				"name": "answer1",
+				"type": "String"
+			},
+			{
+				"name": "answer2",
+				"type": "String"
+			},
+			{
+				"name": "answer3",
+				"type": "String"
+			},
+			{
+				"name": "quizID",
+				"type": "String"
+			},
+			{
+				"name": "correctAnswer",
+				"type": "String"
+			},
+			{
+				"name": "questionType",
+				"type": "String"
+			}
+		]
+	}
+}

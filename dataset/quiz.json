@@ -1,0 +1,58 @@
+{
+	"name": "quiz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "quiz",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "quiz.xlsx",
+				"container": "quiz"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "quizID",
+				"type": "String"
+			},
+			{
+				"name": "InstructorID",
+				"type": "String"
+			},
+			{
+				"name": "quizName",
+				"type": "String"
+			},
+			{
+				"name": "dateOpen",
+				"type": "String"
+			},
+			{
+				"name": "dateClose",
+				"type": "String"
+			},
+			{
+				"name": "quizDescription",
+				"type": "String"
+			},
+			{
+				"name": "quizCode",
+				"type": "String"
+			},
+			{
+				"name": "classAverage",
+				"type": "String"
+			},
+			{
+				"name": "numStudents",
+				"type": "String"
+			}
+		]
+	}
+}
