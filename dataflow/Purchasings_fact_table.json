@@ -1,5 +1,5 @@
 {
-	"name": "makingFactTable",
+	"name": "Purchasings_fact_table",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
