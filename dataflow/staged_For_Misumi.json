@@ -1,5 +1,5 @@
 {
-	"name": "stagedForMisumi",
+	"name": "staged_For_Misumi",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -91,10 +91,10 @@
 				"          min_price_per_piece = iifNull(min_price_per_piece, '0'),",
 				"          max_price_per_piece = iifNull(max_price_per_piece, '0')) ~> minStandardUnitPrice",
 				"minStandardUnitPrice cast(output(",
+				"          department_code as string,",
+				"          max_standard_days_to_ship as double,",
 				"          min_standard_unit_price as double,",
-				"          max_standard_unit_price as double,",
-				"          min_price_per_piece as double,",
-				"          max_price_per_piece as double",
+				"          max_standard_unit_price as double",
 				"     ),",
 				"     errors: true) ~> typecasting",
 				"typecasting select(mapColumn(",
@@ -114,7 +114,7 @@
 				"          min_standard_unit_price,",
 				"          max_standard_unit_price,",
 				"          min_price_per_piece,",
-				"          max_price_per_piece",
+				"          max_price_per_piece = max_standard_days_to_ship",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
