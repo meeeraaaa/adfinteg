@@ -1,0 +1,140 @@
+{
+	"name": "stagedForMisumi",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "categoresSQL",
+						"type": "DatasetReference"
+					},
+					"name": "getCategories",
+					"description": "Import data from categoriesSQL"
+				},
+				{
+					"dataset": {
+						"referenceName": "productsTable",
+						"type": "DatasetReference"
+					},
+					"name": "getProducts"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ProductsCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "gotProductsCleaned"
+				},
+				{
+					"dataset": {
+						"referenceName": "categoriesCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "gotCategories"
+				}
+			],
+			"transformations": [
+				{
+					"name": "minStandardUnitPrice",
+					"description": "updating price columns"
+				},
+				{
+					"name": "typecasting"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          product_category as string,",
+				"          category as string,",
+				"          subcategory as string,",
+				"          category_code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> getCategories",
+				"source(output(",
+				"          department_code as string,",
+				"          category_code as string,",
+				"          category_name as string,",
+				"          search_category_code as string,",
+				"          series_code as string,",
+				"          series_name as string,",
+				"          brand_code as string,",
+				"          brand_url_code as string,",
+				"          brand_name as string,",
+				"          min_standard_days_to_ship as string,",
+				"          max_standard_days_to_ship as string,",
+				"          direct_cart_type as string,",
+				"          price_check_less_flag as string,",
+				"          min_standard_unit_price as string,",
+				"          max_standard_unit_price as string,",
+				"          min_price_per_piece as string,",
+				"          max_price_per_piece as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> getProducts",
+				"getProducts derive(min_standard_unit_price = iifNull(min_standard_unit_price, '0'),",
+				"          max_standard_unit_price = iifNull(max_standard_unit_price, '0'),",
+				"          min_price_per_piece = iifNull(min_price_per_piece, '0'),",
+				"          max_price_per_piece = iifNull(max_price_per_piece, '0')) ~> minStandardUnitPrice",
+				"minStandardUnitPrice cast(output(",
+				"          min_standard_unit_price as double,",
+				"          max_standard_unit_price as double,",
+				"          min_price_per_piece as double,",
+				"          max_price_per_piece as double",
+				"     ),",
+				"     errors: true) ~> typecasting",
+				"typecasting select(mapColumn(",
+				"          department_code,",
+				"          category_code,",
+				"          category_name,",
+				"          search_category_code,",
+				"          series_code,",
+				"          series_name,",
+				"          brand_code,",
+				"          brand_url_code,",
+				"          brand_name,",
+				"          min_standard_days_to_ship,",
+				"          max_standard_days_to_ship,",
+				"          direct_cart_type,",
+				"          price_check_less_flag,",
+				"          min_standard_unit_price,",
+				"          max_standard_unit_price,",
+				"          min_price_per_piece,",
+				"          max_price_per_piece",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> gotProductsCleaned",
+				"getCategories sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> gotCategories"
+			]
+		}
+	}
+}

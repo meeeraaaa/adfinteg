@@ -1,0 +1,40 @@
+{
+	"name": "categories",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "results.csv",
+				"container": "misumi-blob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "product_category",
+				"type": "String"
+			},
+			{
+				"name": "category",
+				"type": "String"
+			},
+			{
+				"name": "subcategory",
+				"type": "String"
+			},
+			{
+				"name": "category_code",
+				"type": "String"
+			}
+		]
+	}
+}
