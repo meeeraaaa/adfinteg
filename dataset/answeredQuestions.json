@@ -1,0 +1,40 @@
+{
+	"name": "answeredQuestions",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "answeredquiz.csv",
+				"container": "quiz"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "answeredQuizID",
+				"type": "String"
+			},
+			{
+				"name": "StudentID",
+				"type": "String"
+			},
+			{
+				"name": "mark",
+				"type": "String"
+			},
+			{
+				"name": "quizID",
+				"type": "String"
+			}
+		]
+	}
+}
